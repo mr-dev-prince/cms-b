@@ -8,6 +8,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const port = process.env.PORT || 4000;
+
 // dbconnection
 
 const connectDb = async () => {
@@ -52,6 +54,6 @@ app.get("/", (req, res) => {
   res.send("Hello");
 });
 
-app.listen(4000, () => {
-  console.log("app running at server 4000");
+app.listen(port, () => {
+  console.log(`"app running at server ${port}`);
 });
