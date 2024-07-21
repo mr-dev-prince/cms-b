@@ -14,7 +14,10 @@ const port = process.env.PORT || 4000;
 
 const connectDb = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI);
+    await mongoose.connect(process.env.MONGO_URI, {
+      dbName: "pHcms",
+      serverSelectionTimeoutMS: 30000,
+    });
 
     console.log("Database connected");
   } catch (error) {
@@ -44,14 +47,21 @@ const createContent = async (req, res) => {
     res.json({ status: 200, success: true, data: response });
   } catch (error) {
     console.log("Error creating content", error);
-    res.json({ status: 400, success: false, data: error });
+    res.json({ status: 400, success: false, data: error?.message });
   }
 };
 
 app.post("/api/post", createContent);
 
+app.get("/get", (req, res) => {
+  res.json({
+    data: "data to get kar pa rahe hain",
+    par: "post nahi kar pa rhe!!",
+  });
+});
+
 app.get("/", (req, res) => {
-  res.send("Hello");
+  res.send("Hello jee");
 });
 
 app.listen(port, () => {
