@@ -14,7 +14,7 @@ const port = process.env.PORT || 4000;
 
 const connectDb = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI, { dbName: "cms" });
+    await mongoose.connect(process.env.MONGO_URI);
 
     console.log("Database connected");
   } catch (error) {
@@ -55,5 +55,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`"app running at server ${port}`);
+  console.log(`app running at server ${port}`);
 });
