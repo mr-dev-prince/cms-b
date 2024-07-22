@@ -5,7 +5,13 @@ import "dotenv/config.js";
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://cms-f.vercel.app/", "http://localhost:5173/"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 const port = process.env.PORT || 4000;
@@ -61,7 +67,7 @@ app.get("/get", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("Hello jee");
+  res.send("checkup-4");
 });
 
 app.listen(port, () => {
